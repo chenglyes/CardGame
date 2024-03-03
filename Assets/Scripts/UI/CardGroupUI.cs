@@ -8,9 +8,9 @@ namespace CardGame
     {
         public List<Transform> UITransformCardPoints;
 
-        private List<int> showCards = new();
+        private List<Card> showCards = new();
 
-        public List<int> ShowCards
+        public List<Card> ShowCards
         {
             get => showCards;
             set
@@ -24,26 +24,23 @@ namespace CardGame
         {
             for (int i = 0; i < UITransformCardPoints.Count; ++i)
             {
-                CardUI card = UITransformCardPoints[i].GetComponentInChildren<CardUI>();
+                CardUI cardUI = UITransformCardPoints[i].GetComponentInChildren<CardUI>();
 
                 if (i < showCards.Count)
                 {
-                    if (card == null)
+                    if (cardUI == null)
                     {
                         var preferb = Resources.Load<GameObject>("Card");
                         var instance = GameObject.Instantiate(preferb, UITransformCardPoints[i]);
-                        card = instance.GetComponent<CardUI>();
+                        cardUI = instance.GetComponent<CardUI>();
                     }
 
-                    card.ShowCardId = showCards[i];
-                    card.gameObject.SetActive(true);
+                    cardUI.ShowCard = showCards[i];
+                    cardUI.gameObject.SetActive(true);
                 }
-                else
+                else if (cardUI != null)
                 {
-                    if (card != null)
-                    {
-                        card.gameObject.SetActive(false);
-                    }
+                    cardUI.gameObject.SetActive(false);
                 }
             }
         }

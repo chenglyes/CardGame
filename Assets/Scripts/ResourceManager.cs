@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CardGame
 {
-    public class ResourceManager
+    public class ResourceManager : Singleton<ResourceManager>
     {
         private Dictionary<int, Sprite> LoadedSprite = new();
 
@@ -24,7 +24,6 @@ namespace CardGame
 
             return sprite;
         }
-
 
     }
 }
